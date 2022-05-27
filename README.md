@@ -19,6 +19,11 @@ cp .env.example .env
 
 NOTE: Create database in your local and put your db credentials in .env file
 
+Run migrations
+```
+php artisan migrate
+```
+
 Start the application
 ```
 php -S localhost:8080 public
