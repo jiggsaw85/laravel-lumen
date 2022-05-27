@@ -1,24 +1,129 @@
-# Lumen PHP Framework
+# Lumen - API CRUD
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+## Local environment setup
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Clone the repo
+```
+git clone git@github.com:jiggsaw85/laravel-lumen.git`
+```
 
-## Official Documentation
+Install project
+```
+cd laravel-lumen && composer install
+```
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Create .env file
+```
+cp .env.example .env
+```
 
-## Contributing
+NOTE: Create database in your local and put your db credentials in .env file
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Start the application
+```
+php -S localhost:8080 public
+```
 
-## Security Vulnerabilities
+## Available endpoints
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Authentication with Auth0
+Get application token (Auth0)
+```
+GET /auth
+```
 
-## License
+### Positions
+Create position
+```
+POST /api/positions
+HEADERS: Authorization Bearer {token}
+BODY: {
+    "name": "string|required",
+    "type": "string|required" (regular|management)
+}
+```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+List all positions
+```
+GET /api/positions
+HEADERS: Authorization Bearer {token}
+```
+
+Get single position
+```
+GET /api/positions/{id}
+HEADERS: Authorization Bearer {token}
+```
+
+Edit position
+```
+PUT /api/positions/{id}
+HEADERS: Authorization Bearer {token}
+BODY: {
+    "name": "string",
+    "type": "string" (regular|management)
+}
+```
+
+Delete position
+```
+DELETE /api/positions/{id}
+HEADERS: Authorization Bearer {token}
+```
+
+### Employees
+Create employee
+```
+POST /api/employees
+HEADERS: Authorization Bearer {token}
+BODY: {
+    "name": "string|required",
+    "position_id": "int|required",
+    "superior_id": "int|optional",
+    "start_date": "date|required", (Y-m-d)
+    "end_date": "date|required",   (Y-m-d)
+}
+```
+
+List all employees
+```
+GET /api/employees
+HEADERS: Authorization Bearer {token}
+```
+
+Get single employee
+```
+GET /api/employees/{id}
+HEADERS: Authorization Bearer {token}
+```
+
+Edit employee
+```
+PUT /api/employees/{id}
+HEADERS: Authorization Bearer {token}
+BODY: {
+    "name": "string|optional",
+    "position_id": "int|optional",
+    "superior_id": "int|optional",
+    "start_date": "date|optional", (Y-m-d)
+    "end_date": "date|optional",   (Y-m-d)
+}
+```
+
+Delete employee
+```
+DELETE /api/employees/{id}
+HEADERS: Authorization Bearer {token}
+```
+
+Get all employees which belongs to superior
+```
+GET /api/superior/employees/{id}
+HEADERS: Authorization Bearer {token}
+```
+
+Get all employees with specific position
+```
+GET /api/employees/position/{id}
+HEADERS: Authorization Bearer {token}
+```
