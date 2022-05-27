@@ -4,7 +4,7 @@
 
 Clone the repo
 ```
-git clone git@github.com:jiggsaw85/laravel-lumen.git`
+git clone git@github.com:jiggsaw85/laravel-lumen.git
 ```
 
 Install project
@@ -26,7 +26,7 @@ php artisan migrate
 
 Start the application
 ```
-php -S localhost:8080 public
+php -S localhost:8080 -t public
 ```
 
 ## Available endpoints
